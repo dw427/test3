@@ -6,14 +6,7 @@
     "images": [
       "/alfoze/images/1-tecura/tecura1.png",
       "/alfoze/images/1-tecura/tecura2.png"
-    ],
-    "captions": {
-      "caption1": "te cura",
-      "caption2": "2022, brand design",
-      "caption3": "-",
-      "caption4": "2022 project overview",
-      "caption5": "branding, identity, package"
-    }
+    ]
   },
   {
     "title": "lost romance",
@@ -28,14 +21,7 @@
       "/alfoze/images/2-romance/romance6.png",
       "/alfoze/images/2-romance/romance7.png",
       "/alfoze/images/2-romance/romance8.png"
-    ],
-    "captions": {
-      "caption1": "lost romance",
-      "caption2": "2023, graphic design",
-      "caption3": "-",
-      "caption4": "2023 graduation exhibition",
-      "caption5": "poster, book, package, cd"
-    }
+    ]
   },
   {
     "title": "blish",
@@ -44,14 +30,7 @@
     "images": [
       "/alfoze/images/3-blish/1.png",
       "/alfoze/images/3-blish/2.png"
-    ],
-    "captions": {
-      "caption1": "blish",
-      "caption2": "2023, brand design",
-      "caption3": "-",
-      "caption4": "2023 branding project",
-      "caption5": "logo, identity, package"
-    }
+    ]
   },
   {
     "title": "An inverted realtionship",
@@ -60,14 +39,7 @@
     "images": [
       "/alfoze/images/4-inverted/1.png",
       "/alfoze/images/4-inverted/2.png"
-    ],
-    "captions": {
-      "caption1": "An inverted realtionship",
-      "caption2": "2023, editorial",
-      "caption3": "-",
-      "caption4": "editorial project",
-      "caption5": "book, poster"
-    }
+    ]
   },
   {
     "title": "Immortality : The Death of Death",
@@ -76,14 +48,7 @@
     "images": [
       "/alfoze/images/5-immortality/1.png",
       "/alfoze/images/5-immortality/2.png"
-    ],
-    "captions": {
-      "caption1": "Immortality : The Death of Death",
-      "caption2": "2024, brand design",
-      "caption3": "-",
-      "caption4": "2024 branding concept",
-      "caption5": "package, poster"
-    }
+    ]
   },
   {
     "title": "Heaven",
@@ -92,14 +57,7 @@
     "images": [
       "/alfoze/images/6-heaven/1.png",
       "/alfoze/images/6-heaven/2.png"
-    ],
-    "captions": {
-      "caption1": "Heaven",
-      "caption2": "2024, graphic design",
-      "caption3": "-",
-      "caption4": "visual design project",
-      "caption5": "poster, digital"
-    }
+    ]
   },
   {
     "title": "Everybody",
@@ -108,14 +66,7 @@
     "images": [
       "/alfoze/images/7-everybody/1.png",
       "/alfoze/images/7-everybody/2.png"
-    ],
-    "captions": {
-      "caption1": "Everybody",
-      "caption2": "2024, graphic design",
-      "caption3": "-",
-      "caption4": "visual communication",
-      "caption5": "poster, book"
-    }
+    ]
   },
   {
     "title": "Monster",
@@ -124,14 +75,7 @@
     "images": [
       "/alfoze/images/8-monster/1.png",
       "/alfoze/images/8-monster/2.png"
-    ],
-    "captions": {
-      "caption1": "Monster",
-      "caption2": "2024, graphic design",
-      "caption3": "-",
-      "caption4": "character design project",
-      "caption5": "poster, book, merchandise"
-    }
+    ]
   },
   {
     "title": "Ideal Expression",
@@ -140,14 +84,7 @@
     "images": [
       "/alfoze/images/9-ideal/1.png",
       "/alfoze/images/9-ideal/2.png"
-    ],
-    "captions": {
-      "caption1": "Ideal Expression",
-      "caption2": "2024, graphic design",
-      "caption3": "-",
-      "caption4": "design concept",
-      "caption5": "poster, book"
-    }
+    ]
   },
   {
     "title": "alfoze",
@@ -156,14 +93,7 @@
     "images": [
       "/alfoze/images/10-alfoze/1.png",
       "/alfoze/images/10-alfoze/2.png"
-    ],
-    "captions": {
-      "caption1": "alfoze",
-      "caption2": "2025, brand design",
-      "caption3": "-",
-      "caption4": "branding and identity",
-      "caption5": "logo, package"
-    }
+    ]
   },
   {
     "title": "Valentine",
@@ -172,14 +102,7 @@
     "images": [
       "/alfoze/images/11-valentine/1.png",
       "/alfoze/images/11-valentine/2.png"
-    ],
-    "captions": {
-      "caption1": "Valentine",
-      "caption2": "2025, graphic design",
-      "caption3": "-",
-      "caption4": "visual storytelling",
-      "caption5": "poster, book, digital"
-    }
+    ]
   },
   {
     "title": "Forever",
@@ -188,14 +111,7 @@
     "images": [
       "/alfoze/images/12-forever/1.png",
       "/alfoze/images/12-forever/2.png"
-    ],
-    "captions": {
-      "caption1": "Forever",
-      "caption2": "2025, graphic design",
-      "caption3": "-",
-      "caption4": "illustration and graphics",
-      "caption5": "poster, book"
-    }
+    ]
   },
   {
     "title": "Lov",
@@ -204,14 +120,7 @@
     "images": [
       "/alfoze/images/13-lov/1.png",
       "/alfoze/images/13-lov/2.png"
-    ],
-    "captions": {
-      "caption1": "Lov",
-      "caption2": "2025, brand design",
-      "caption3": "-",
-      "caption4": "branding concept",
-      "caption5": "logo, package"
-    }
+    ]
   },
   {
     "title": "Dreamscape",
@@ -220,13 +129,6 @@
     "images": [
       "/alfoze/images/14-dreamscape/1.png",
       "/alfoze/images/14-dreamscape/2.png"
-    ],
-    "captions": {
-      "caption1": "Dreamscape",
-      "caption2": "2025, graphic design",
-      "caption3": "-",
-      "caption4": "visual project",
-      "caption5": "poster, digital"
-    }
+    ]
   }
 ]

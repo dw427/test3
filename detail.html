@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ㄴalfoze</title>
+  <title>alfoze</title>
   <link rel="icon" type="image/png" href="/alfoze/images/fav.png" />
   <link rel="apple-touch-icon" href="/alfoze/images/fav.png" />
   <meta name="theme-color" content="#ffffff" />
@@ -123,7 +123,6 @@
       const item = data[idx-1];
       if(!item) return;
 
-      // Fixed image
       const fixedImageContainer = document.getElementById("fixedImageContainer");
       fixedImageContainer.innerHTML = "";
       if(item.images){
@@ -135,7 +134,6 @@
         });
       }
 
-      // Thumbnail gallery
       const gallery = document.getElementById('gallery');
       gallery.innerHTML = "";
       data.slice().reverse().forEach((d, revIdx)=>{
@@ -155,15 +153,13 @@
         gallery.appendChild(a);
       });
 
-      // Caption box
       const captionBox = document.getElementById("captionBox");
-      const captions = item.captions || {};
       captionBox.innerHTML = `
-        <div class="caption1">${captions.caption1 || ''}</div>
-        <div class="caption2">${captions.caption2 || ''}</div>
-        <div class="caption3">${captions.caption3 || ''}</div>
-        <div class="caption4">${captions.caption4 || ''}</div>
-        <div class="caption5">${captions.caption5 || ''}</div>
+        <div class="caption1">${item.title}</div>
+        <div class="caption2">${item.year}, ${item.category}</div>
+        <div class="caption3">-</div>
+        <div class="caption4">2023 graduation exhibition</div>
+        <div class="caption5">package, book, poster, postcard, cd</div>
       `;
     }
 
