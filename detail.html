@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>detail</title>
+  <link rel="icon" type="image/png" href="/alfoze/images/fav.png" />
+  <link rel="apple-touch-icon" href="/alfoze/images/fav.png" />
+
+  <style>
+    /* ======= 기존 누님 스타일 그대로 유지 ======= */
+    @import url("https://use.typekit.net/zuk4pzv.css");
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "minion-pro", serif; background: #fff; }
+
+    .gallery-wrap {
+      display: grid;
+      height: 100vh;
+      grid-template-columns: 24.68% 33.10% 17.55% 24.68%;
+    }
+
+    .left-image img { width: 100%; height: 100%; object-fit: cover; }
+
+    .fixed-image { overflow-y: auto; border-left: 1px solid #9fa0a0; border-right: 1px solid #9fa0a0; }
+    .fixed-image img { width: 100%; display: block; cursor: pointer; }
+
+    .scroll-area { overflow-y: auto; border-right: 1px solid #9fa0a0; }
+    .content { display: grid; grid-template-columns: repeat(2,1fr); }
+
+    .caption-group { padding: 20px; font-size: 12px; }
+    .caption1 { font-size: 20px; margin-bottom: 3px; }
+    .caption2 { margin-bottom: 20px; }
+
+    /* 모바일 유지 */
+    @media (max-width: 768px) {
+      .gallery-wrap { display: block; }
+      .left-image { display: none; }
+      .scroll-area { display: none; }
+      .fixed-image { border: none; }
+    }
+
+    /* 이미지 확대 뷰어 */
+    .image-viewer {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.85);
+      display: flex; justify-content: center; align-items: center;
+      opacity: 0; visibility: hidden; transition: .3s;
+    }
+    .image-viewer.active { opacity: 1; visibility: visible; }
+    .image-viewer img { max-width: 90%; max-height: 90%; }
+  </style>
+</head>
+
+<body>
+  <div class="gallery-wrap">
+    <div class="left-image">
+      <img id="leftImage" src="" alt="">
+    </div>
+
+    <div class="fixed-image" id="detailImages"></div>
+
+    <div class="scroll-area">
+      <div class="content" id="thumbList"></div>
+    </div>
+
+    <div class="slide-box" id="captionBox">
+      <div class="caption-group">
+        <div class="caption1" id="capTitle"></div>
+        <div class="caption2" id="capInfo"></div>
+        <div class="caption3" id="capExtra1"></div>
+        <div class="caption4" id="capExtra2"></div>
+        <div class="caption5" id="capExtra3"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-viewer" id="imageViewer">
+    <img src="" alt="">
+  </div>
+
+  <script>
+    async function loadDetail() {
+      const res = await fetch("/alfoze/data.json");
+      const data = await res.json();
+
+      const params = new URLSearchParams(location.search);
+      const id = parseInt(params.get("id"), 10);
+
+      const item = data[id - 1];
+      if (!item) return;
+
+      /* Left Image */
+      document.getElementById("leftImage").src = item.leftImage;
+
+      /* Detail Images */
+      const imgBox = document.getElementById("detailImages");
+      imgBox.innerHTML = item.images.map(src => 
+        `<img src="${src}" />`
+      ).join("");
+
+      /* Caption */
+      document.getElementById("capTitle").textContent = item.title;
+      document.getElementById("capInfo").textContent = `${item.year}, ${item.category}`;
+      document.getElementById("capExtra1").textContent = item.caption1 || "-";
+      document.getElementById("capExtra2").textContent = item.caption2 || "";
+      document.getElementById("capExtra3").textContent = item.caption3 || "";
+
+      /* Thumbnail List */
+      const list = document.getElementById("thumbList");
+      list.innerHTML = data.map((d,i)=>`
+        <a href="/alfoze/detail.html?id=${i+1}" class="thumbnail">
+          <img src="${d.thumb}" />
+          <div class="caption">
+            <span class="title">${d.title}</span>
+            <span class="category-year">
+              <span class="category">${d.category}</span>
+              <span class="year">${d.year}</span>
+            </span>
+          </div>
+        </a>
+      `).join("");
+
+      /* Image Viewer */
+      const viewer = document.getElementById("imageViewer");
+      const viewerImg = viewer.querySelector("img");
+      document.querySelectorAll("#detailImages img").forEach(img=>{
+        img.addEventListener("click",()=>{
+          viewerImg.src = img.src;
+          viewer.classList.add("active");
+        });
+      });
+      viewer.addEventListener("click",()=> viewer.classList.remove("active"));
+    }
+
+    document.addEventListener("DOMContentLoaded", loadDetail);
+  </script>
+</body>
+</html>
