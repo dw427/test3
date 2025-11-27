@@ -27,4 +27,39 @@ a:hover{color:#a3a3a3;}
 <div class="caption-group" id="captionBox"></div>
 <div class="footer">
 <a href="/test/">back</a>
-<div id="listButton" onclick="
+<div id="listButton" onclick="toggleSlideBox()">list</div>
+</div>
+<div class="image-viewer" id="imageViewer"><img src="" alt="viewer image"/></div>
+<script>
+async function loadDetail(){
+const res=await fetch("../data.json");
+const data=await res.json();
+const pathParts=window.location.pathname.split("/");
+const idx=parseInt(pathParts[pathParts.length-2],10)-1;
+const item=data[idx];if(!item)return;
+const fixed=document.getElementById("fixedImage");
+fixed.innerHTML="";
+item.images.forEach(src=>{
+const img=document.createElement("img");
+img.src=src;
+img.alt=item.title;
+fixed.appendChild(img);
+});
+const captionBox=document.getElementById("captionBox");
+captionBox.innerHTML="";
+item.captions.forEach(c=>{
+const div=document.createElement("div");div.textContent=c;captionBox.appendChild(div);
+});
+const viewer=document.getElementById("imageViewer");
+const viewerImg=viewer.querySelector("img");
+document.querySelectorAll(".fixed-image img").forEach(img=>{
+img.addEventListener("click",()=>{viewerImg.src=img.src;viewer.classList.add("active");});
+});
+viewer.addEventListener("click",()=>viewer.classList.remove("active"));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")viewer.classList.remove("active");});
+}
+document.addEventListener("DOMContentLoaded",loadDetail);
+function toggleSlideBox(){alert("slide box toggle");}
+</script>
+</body>
+</html>
