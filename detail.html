@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ㄴ2alfoze</title>
+  <title>ㅈalfoze</title>
   <link rel="icon" type="image/png" href="/alfoze/images/fav.png" />
   <link rel="apple-touch-icon" href="/alfoze/images/fav.png" />
   <meta name="theme-color" content="#ffffff" />
@@ -92,8 +92,7 @@
       <img src="/alfoze/images/leftimage.png" alt="left image" />
     </div>
 
-    <div class="fixed-image" id="fixedImageContainer">
-    </div>
+    <div class="fixed-image" id="fixedImageContainer"></div>
 
     <div class="scroll-area">
       <div class="content" id="gallery"></div>
@@ -119,15 +118,15 @@
       const res = await fetch("data.json");
       const data = await res.json();
       const urlParams = new URLSearchParams(window.location.search);
-      const idx = parseInt(urlParams.get("idx"),10);
-      const item = data[idx-1];
-      if(!item) return;
+      const idx = parseInt(urlParams.get("idx"), 10);
+      const item = data[idx - 1];
+      if (!item) return;
 
-      // Fixed image
+      // 고정 이미지
       const fixedImageContainer = document.getElementById("fixedImageContainer");
       fixedImageContainer.innerHTML = "";
-      if(item.images){
-        item.images.forEach(imgSrc=>{
+      if (item.images) {
+        item.images.forEach(imgSrc => {
           const img = document.createElement("img");
           img.src = imgSrc;
           img.alt = item.title;
@@ -135,16 +134,16 @@
         });
       }
 
-      // Thumbnail gallery
+      // 썸네일
       const gallery = document.getElementById('gallery');
       gallery.innerHTML = "";
-      data.slice().reverse().forEach((d, revIdx)=>{
+      data.slice().reverse().forEach((d, revIdx) => {
         const i = data.length - 1 - revIdx;
         const a = document.createElement('a');
-        a.href = `detail.html?idx=${i+1}`;
-        a.className = 'thumbnail thumb'+(i+1);
+        a.href = `detail.html?idx=${i + 1}`;
+        a.className = 'thumbnail thumb' + (i + 1);
         a.innerHTML = `
-          <img src="/alfoze/images/thumb${i+1}.png" alt="썸네일${i+1}"/>
+          <img src="/alfoze/images/thumb${i + 1}.png" alt="썸네일${i + 1}"/>
           <div class="caption">
             <span class="title">${d.title}</span>
             <span class="category-year">
@@ -155,20 +154,21 @@
         gallery.appendChild(a);
       });
 
-      // Caption box
+      // 캡션 자동 적용
       const captionBox = document.getElementById("captionBox");
-      const captions = item.captions || {};
-      captionBox.innerHTML = `
-        <div class="caption1">${captions.caption1 || ''}</div>
-        <div class="caption2">${captions.caption2 || ''}</div>
-        <div class="caption3">${captions.caption3 || ''}</div>
-        <div class="caption4">${captions.caption4 || ''}</div>
-        <div class="caption5">${captions.caption5 || ''}</div>
-      `;
+      captionBox.innerHTML = "";
+      if (item.captions) {
+        Object.keys(item.captions).forEach(key => {
+          const div = document.createElement("div");
+          div.className = key;
+          div.textContent = item.captions[key];
+          captionBox.appendChild(div);
+        });
+      }
     }
 
     function toggleSlideBox() {
-      if(window.innerWidth <=768){
+      if(window.innerWidth <= 768){
         const sb = document.getElementById('slideBox');
         const txt = document.getElementById('slideToggleText');
         sb.classList.toggle('active');
@@ -180,16 +180,16 @@
     document.addEventListener("DOMContentLoaded", ()=>{
       loadData();
 
-      if(window.innerWidth<=768){
-        const sb=document.getElementById('slideBox');
-        const txt=document.getElementById('slideToggleText');
+      if(window.innerWidth <= 768){
+        const sb = document.getElementById('slideBox');
+        const txt = document.getElementById('slideToggleText');
         sb.classList.remove('active');
-        txt.textContent='list';
-        document.getElementById('listButton').textContent='list';
+        txt.textContent = 'list';
+        document.getElementById('listButton').textContent = 'list';
       }
 
-      const viewer=document.getElementById("imageViewer");
-      const viewerImg=viewer.querySelector("img");
+      const viewer = document.getElementById("imageViewer");
+      const viewerImg = viewer.querySelector("img");
       document.querySelectorAll(".fixed-image img").forEach(img=>{
         img.addEventListener("click",()=>{
           viewerImg.src=img.src;
@@ -197,7 +197,7 @@
         });
       });
       viewer.addEventListener("click",()=>viewer.classList.remove("active"));
-      document.addEventListener("keydown",e=>{
+      document.addEventListener("keydown", e=>{
         if(e.key==="Escape") viewer.classList.remove("active");
       });
     });
