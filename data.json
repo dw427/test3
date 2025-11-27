@@ -1,0 +1,17 @@
+[
+  {
+    "title":"te cura",
+    "category":"brand design",
+    "year":"2022",
+    "images":["tecura1.png","tecura2.png"],
+    "caption":["-","2022 graduation exhibition","package, book, poster, postcard, cd"]
+  },
+  {
+    "title":"lost romance",
+    "category":"graphic design",
+    "year":"2023",
+    "images":["romance1.png","romance2.png","romance3.png","romance4.png","romance5.png","romance6.png","romance7.gif","romance8.png"],
+    "caption":["-","2023 graduation exhibition","package, book, poster, postcard, cd"]
+  }
+  // 나머지 12페이지 동일 구조
+]
