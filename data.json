@@ -4,15 +4,18 @@
     "category": "brand design",
     "year": "2022",
     "images": [
-      "/alfoze/images/1-tecura/tecura1.png",
-      "/alfoze/images/1-tecura/tecura2.png"
+      "/test/images/1-te cura/tecura1.png",
+      "/test/images/1-te cura/tecura2.png",
+      "/test/images/1-te cura/tecura3.png",
+      "/test/images/1-te cura/tecura5-2.png",
+      "/test/images/1-te cura/tecura4.png",
     ],
     "captions": {
       "caption1": "te cura",
       "caption2": "2022, brand design",
       "caption3": "-",
-      "caption4": "2023 graduation exhibition",
-      "caption5": "package, book, poster, postcard, cd"
+      "caption4": "personal project",
+      "caption5": "package, book, poster, pattern"
     }
   },
   {
