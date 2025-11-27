@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2alfoze detail</title>
+  <title>ㄴalfoze</title>
   <link rel="icon" type="image/png" href="/alfoze/images/fav.png" />
   <link rel="apple-touch-icon" href="/alfoze/images/fav.png" />
   <meta name="theme-color" content="#ffffff" />
@@ -92,7 +92,8 @@
       <img src="/alfoze/images/leftimage.png" alt="left image" />
     </div>
 
-    <div class="fixed-image" id="fixedImageContainer"></div>
+    <div class="fixed-image" id="fixedImageContainer">
+    </div>
 
     <div class="scroll-area">
       <div class="content" id="gallery"></div>
@@ -122,6 +123,7 @@
       const item = data[idx-1];
       if(!item) return;
 
+      // Fixed image
       const fixedImageContainer = document.getElementById("fixedImageContainer");
       fixedImageContainer.innerHTML = "";
       if(item.images){
@@ -130,16 +132,10 @@
           img.src = imgSrc;
           img.alt = item.title;
           fixedImageContainer.appendChild(img);
-
-          img.addEventListener("click",()=>{
-            const viewer = document.getElementById("imageViewer");
-            const viewerImg = viewer.querySelector("img");
-            viewerImg.src = img.src;
-            viewer.classList.add("active");
-          });
         });
       }
 
+      // Thumbnail gallery
       const gallery = document.getElementById('gallery');
       gallery.innerHTML = "";
       data.slice().reverse().forEach((d, revIdx)=>{
@@ -159,13 +155,15 @@
         gallery.appendChild(a);
       });
 
+      // Caption box
       const captionBox = document.getElementById("captionBox");
+      const captions = item.captions || {};
       captionBox.innerHTML = `
-        <div class="caption1">${item.captions.caption1}</div>
-        <div class="caption2">${item.captions.caption2}</div>
-        <div class="caption3">${item.captions.caption3}</div>
-        <div class="caption4">${item.captions.caption4}</div>
-        <div class="caption5">${item.captions.caption5}</div>
+        <div class="caption1">${captions.caption1 || ''}</div>
+        <div class="caption2">${captions.caption2 || ''}</div>
+        <div class="caption3">${captions.caption3 || ''}</div>
+        <div class="caption4">${captions.caption4 || ''}</div>
+        <div class="caption5">${captions.caption5 || ''}</div>
       `;
     }
 
@@ -192,6 +190,12 @@
 
       const viewer=document.getElementById("imageViewer");
       const viewerImg=viewer.querySelector("img");
+      document.querySelectorAll(".fixed-image img").forEach(img=>{
+        img.addEventListener("click",()=>{
+          viewerImg.src=img.src;
+          viewer.classList.add("active");
+        });
+      });
       viewer.addEventListener("click",()=>viewer.classList.remove("active"));
       document.addEventListener("keydown",e=>{
         if(e.key==="Escape") viewer.classList.remove("active");
