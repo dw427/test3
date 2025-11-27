@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>test3</title>
-  <link rel="icon" type="image/png" href="/test/images/fav2.png" />
-  <link rel="apple-touch-icon" href="/test/images/fav1.png" />
+  <title>test2</title>
+  <link rel="icon" type="image/png" href="/alfoze/images/fav2.png" />
+  <link rel="apple-touch-icon" href="/alfoze/images/fav1.png" />
   <meta name="theme-color" content="#ffffff" />
   <style>
     @import url("https://use.typekit.net/zuk4pzv.css");
@@ -15,15 +15,8 @@
     a { color: inherit; text-decoration: none; transition: color .3s; }
     a:hover { color: #a3a3a3; }
 
-    .footer {
-      width: 100%;
-      height: 100px;
-      background: transparent;
-      z-index: 1000;
-    }
-    .footer .right-link,
-    .footer .contact-link,
-    .footer #listButton {
+    .footer { width: 100%; height: 100px; background: transparent; z-index: 1000; }
+    .footer .right-link, .footer .contact-link, .footer #listButton {
       position: absolute; bottom: 10px; font-size: 12px;
     }
     .footer .right-link { left: 30px; }
@@ -71,9 +64,8 @@
     .header { display: none; }
 
     @media (max-width: 768px) {
-      .side { display: none; }
-      .fixed-image { display: none; }
-      .content { grid-template-columns: repeat(2, 1fr); column-gap: 0; row-gap: 0; padding: 0; }
+      .side, .fixed-image { display: none; }
+      .content { grid-template-columns: repeat(2, 1fr); padding: 0; }
       .thumbnail { width: 100%; margin-bottom: 0; }
       .thumbnail img { width: 100%; height: auto; }
       .caption { margin: 8px 0; }
@@ -83,30 +75,29 @@
       .footer #listButton { bottom: 20px; right: 20px; }
       .slide-box { width: 100% !important; }
       .slide-box .slide-list { bottom: 20px; right: 20px; }
-
-      .header { width: 100%; height: 60px; background: #ffffff; display: flex; align-items: center; justify-content: center; position: sticky; top: 0; z-index: 1000; }
+      .header { width: 100%; height: 60px; display: flex; align-items: center; justify-content: center; position: sticky; top:0; z-index:1000; }
       .header img { height: 100%; width: auto; }
     }
 
     @media (min-width: 769px) {
       body, html { width: 100%; height: 100%; overflow: hidden; }
       .gallery-wrap { width: 765px; height: 100%; margin: 0 auto; display: flex; }
-      .fixed-image { width: 500px; height: 100%; position: sticky; top: 0; display:flex; justify-content:center; align-items:center; overflow:hidden; }
+      .fixed-image { width: 500px; height: 100%; position: sticky; top:0; display:flex; justify-content:center; align-items:center; overflow:hidden; }
       .fixed-image img { max-width: 100%; max-height: 100%; object-fit: contain; }
       .scroll-area { width: 265px; height: 100vh; overflow-y: scroll; }
-      .content { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; }
+      .content { display: grid; grid-template-columns: repeat(2, 1fr); gap:0; }
       .thumbnail { margin-bottom: 8px; width: 100%; }
     }
   </style>
 </head>
 <body>
   <div class="header">
-    <img src="images/header0.png" alt="header" />
+    <img src="/alfoze/images/header0.png" alt="header" />
   </div>
 
   <div class="gallery-wrap">
     <div class="fixed-image">
-      <img src="images/index2.png" alt="index" />
+      <img src="/alfoze/images/index2.png" alt="index" />
     </div>
     <div class="scroll-area">
       <div class="content" id="gallery"></div>
@@ -132,15 +123,13 @@
       const gallery = document.getElementById('gallery');
       gallery.innerHTML = "";
 
-      // 최신순으로 출력 (최신이 위)
       for (let i = data.length; i >= 1; i--) {
         const d = data[i-1];
         const item = document.createElement('a');
-        // 상세페이지는 detail.html?page=로 연동
-        item.href = `detail.html?page=${i}`;
+        item.href = `detail.html?idx=${i}`;
         item.className = 'thumbnail thumb'+i;
         item.innerHTML = `
-          <img src="images/thumb${i}.png" alt="썸네일${i}"/>
+          <img src="/alfoze/images/thumb${i}.png" alt="썸네일${i}"/>
           <div class="caption">
             <span class="title">${d.title}</span>
             <span class="category-year">
@@ -157,7 +146,7 @@
         const g = document.createElement('div');
         g.className = 'text-group';
         g.innerHTML = `
-          <div class="text1"><a href="detail.html?page=${idx+1}">${d.title}</a></div>
+          <div class="text1"><a href="detail.html?idx=${idx+1}">${d.title}</a></div>
           <div class="text2">${d.category}</div>
           <div class="text3">${d.year}</div>`;
         slideContent.append(g);
