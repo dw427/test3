@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ㅈalfoze</title>
+  <title>2alfoze detail</title>
   <link rel="icon" type="image/png" href="/alfoze/images/fav.png" />
   <link rel="apple-touch-icon" href="/alfoze/images/fav.png" />
   <meta name="theme-color" content="#ffffff" />
@@ -118,32 +118,37 @@
       const res = await fetch("data.json");
       const data = await res.json();
       const urlParams = new URLSearchParams(window.location.search);
-      const idx = parseInt(urlParams.get("idx"), 10);
-      const item = data[idx - 1];
-      if (!item) return;
+      const idx = parseInt(urlParams.get("idx"),10);
+      const item = data[idx-1];
+      if(!item) return;
 
-      // 고정 이미지
       const fixedImageContainer = document.getElementById("fixedImageContainer");
       fixedImageContainer.innerHTML = "";
-      if (item.images) {
-        item.images.forEach(imgSrc => {
+      if(item.images){
+        item.images.forEach(imgSrc=>{
           const img = document.createElement("img");
           img.src = imgSrc;
           img.alt = item.title;
           fixedImageContainer.appendChild(img);
+
+          img.addEventListener("click",()=>{
+            const viewer = document.getElementById("imageViewer");
+            const viewerImg = viewer.querySelector("img");
+            viewerImg.src = img.src;
+            viewer.classList.add("active");
+          });
         });
       }
 
-      // 썸네일
       const gallery = document.getElementById('gallery');
       gallery.innerHTML = "";
-      data.slice().reverse().forEach((d, revIdx) => {
+      data.slice().reverse().forEach((d, revIdx)=>{
         const i = data.length - 1 - revIdx;
         const a = document.createElement('a');
-        a.href = `detail.html?idx=${i + 1}`;
-        a.className = 'thumbnail thumb' + (i + 1);
+        a.href = `detail.html?idx=${i+1}`;
+        a.className = 'thumbnail thumb'+(i+1);
         a.innerHTML = `
-          <img src="/alfoze/images/thumb${i + 1}.png" alt="썸네일${i + 1}"/>
+          <img src="/alfoze/images/thumb${i+1}.png" alt="썸네일${i+1}"/>
           <div class="caption">
             <span class="title">${d.title}</span>
             <span class="category-year">
@@ -154,21 +159,18 @@
         gallery.appendChild(a);
       });
 
-      // 캡션 자동 적용
       const captionBox = document.getElementById("captionBox");
-      captionBox.innerHTML = "";
-      if (item.captions) {
-        Object.keys(item.captions).forEach(key => {
-          const div = document.createElement("div");
-          div.className = key;
-          div.textContent = item.captions[key];
-          captionBox.appendChild(div);
-        });
-      }
+      captionBox.innerHTML = `
+        <div class="caption1">${item.captions.caption1}</div>
+        <div class="caption2">${item.captions.caption2}</div>
+        <div class="caption3">${item.captions.caption3}</div>
+        <div class="caption4">${item.captions.caption4}</div>
+        <div class="caption5">${item.captions.caption5}</div>
+      `;
     }
 
     function toggleSlideBox() {
-      if(window.innerWidth <= 768){
+      if(window.innerWidth <=768){
         const sb = document.getElementById('slideBox');
         const txt = document.getElementById('slideToggleText');
         sb.classList.toggle('active');
@@ -180,24 +182,18 @@
     document.addEventListener("DOMContentLoaded", ()=>{
       loadData();
 
-      if(window.innerWidth <= 768){
-        const sb = document.getElementById('slideBox');
-        const txt = document.getElementById('slideToggleText');
+      if(window.innerWidth<=768){
+        const sb=document.getElementById('slideBox');
+        const txt=document.getElementById('slideToggleText');
         sb.classList.remove('active');
-        txt.textContent = 'list';
-        document.getElementById('listButton').textContent = 'list';
+        txt.textContent='list';
+        document.getElementById('listButton').textContent='list';
       }
 
-      const viewer = document.getElementById("imageViewer");
-      const viewerImg = viewer.querySelector("img");
-      document.querySelectorAll(".fixed-image img").forEach(img=>{
-        img.addEventListener("click",()=>{
-          viewerImg.src=img.src;
-          viewer.classList.add("active");
-        });
-      });
+      const viewer=document.getElementById("imageViewer");
+      const viewerImg=viewer.querySelector("img");
       viewer.addEventListener("click",()=>viewer.classList.remove("active"));
-      document.addEventListener("keydown", e=>{
+      document.addEventListener("keydown",e=>{
         if(e.key==="Escape") viewer.classList.remove("active");
       });
     });
