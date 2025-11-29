@@ -25,16 +25,21 @@
     "year": "2023",
     "thumbnail": "/test/images/thumb2.png",
     "captions": {
-      "caption1": "lost romance",
+      "caption1": "a generation that has lost romance",
       "caption2": "2023, graphic design",
       "caption3": "-",
       "caption4": "2023 graduation exhibition",
-      "caption5": "poster, book, package"
+      "caption5": "package, book, poster, postcard, cd"
     },
     "images": [
       "/test/images/2-romance/romance1.png",
       "/test/images/2-romance/romance2.png",
-      "/test/images/2-romance/romance3.png"
+      "/test/images/2-romance/romance3.png",
+      "/test/images/2-romance/romance4.png",
+      "/test/images/2-romance/romance5.png",
+      "/test/images/2-romance/romance6.png",
+      "/test/images/2-romance/romance8-1.gif",
+      "/test/images/2-romance/romance7.png"
     ]
   },
   {
