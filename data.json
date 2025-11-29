@@ -115,12 +115,18 @@
       "caption1": "Heaven",
       "caption2": "2024, graphic design",
       "caption3": "-",
-      "caption4": "2024 graduation exhibition",
-      "caption5": "poster, cd"
+      "caption4": "interview task",
+      "caption5": "2 types album, out box, photo book, cdr, poster"
     },
     "images": [
       "/test/images/6-heaven/1.png",
-      "/test/images/6-heaven/2.png"
+      "/test/images/6-heaven/2.png",
+      "/test/images/6-heaven/3.png",
+      "/test/images/6-heaven/4.png",
+      "/test/images/6-heaven/5.png",
+      "/test/images/6-heaven/6.png",
+      "/test/images/6-heaven/7.png"
+      
     ]
   },
   {
@@ -132,12 +138,25 @@
       "caption1": "Everybody",
       "caption2": "2024, graphic design",
       "caption3": "-",
-      "caption4": "2024 graduation exhibition",
-      "caption5": "poster, package"
+      "caption4": "interview task",
+      "caption5": "3 types album, out box, photo book, cdr, photocard"
     },
     "images": [
       "/test/images/7-everybody/1.png",
-      "/test/images/7-everybody/2.png"
+      "/test/images/7-everybody/2.png",
+      "/test/images/7-everybody/3.png",
+      "/test/images/7-everybody/4.png",
+      "/test/images/7-everybody/5.png",
+      "/test/images/7-everybody/6.png",
+      "/test/images/7-everybody/7.png",
+      "/test/images/7-everybody/8.png",
+      "/test/images/7-everybody/9.png",
+      "/test/images/7-everybody/10.png",
+      "/test/images/7-everybody/11.png",
+      "/test/images/7-everybody/12.png",
+      "/test/images/7-everybody/13.png",
+      "/test/images/7-everybody/14.png",
+      "/test/images/7-everybody/15.png"
     ]
   },
   {
@@ -149,12 +168,19 @@
       "caption1": "Monster",
       "caption2": "2024, graphic design",
       "caption3": "-",
-      "caption4": "2024 graduation exhibition",
-      "caption5": "poster, cd"
+      "caption4": "interview task",
+      "caption5": "3types album, out box, photo book, profile book, cd"
     },
     "images": [
+      "/test/images/8-monster/2-1.png",
       "/test/images/8-monster/1.png",
-      "/test/images/8-monster/2.png"
+      "/test/images/8-monster/3.png",
+      "/test/images/8-monster/4.png",
+      "/test/images/8-monster/5.png",
+      "/test/images/8-monster/6.png",
+      "/test/images/8-monster/7.png",
+      "/test/images/8-monster/8.png",
+      "/test/images/8-monster/9.png"
     ]
   },
   {
@@ -166,12 +192,13 @@
       "caption1": "Ideal Expression",
       "caption2": "2024, graphic design",
       "caption3": "-",
-      "caption4": "2024 graduation exhibition",
-      "caption5": "poster, book"
+      "caption4": "ORGD 2024",
+      "caption5": "graphic poster"
     },
     "images": [
       "/test/images/9-ideal/1.png",
-      "/test/images/9-ideal/2.png"
+      "/test/images/9-ideal/2.png",
+      "/test/images/9-ideal/3.png"
     ]
   },
   {
