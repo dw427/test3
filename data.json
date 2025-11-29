@@ -52,11 +52,17 @@
       "caption2": "2023, brand design",
       "caption3": "-",
       "caption4": "2023 graduation exhibition",
-      "caption5": "package, book"
+      "caption5": "package, book, poster, postcard"
     },
     "images": [
       "/test/images/3-blish/1.png",
-      "/test/images/3-blish/2.png"
+      "/test/images/3-blish/2.png",
+      "/test/images/3-blish/3.png",
+      "/test/images/3-blish/4.png",
+      "/test/images/3-blish/5.png",
+      "/test/images/3-blish/6.png",
+      "/test/images/3-blish/7.png",
+      "/test/images/3-blish/8.png"
     ]
   },
   {
