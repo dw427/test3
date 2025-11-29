@@ -210,12 +210,14 @@
       "caption1": "alfoze",
       "caption2": "2025, brand design",
       "caption3": "-",
-      "caption4": "2025 graduation exhibition",
-      "caption5": "package, cd"
+      "caption4": "personal project",
+      "caption5": "logo, tag, system book"
     },
     "images": [
-      "/test/images/10-alfoze/1.png",
-      "/test/images/10-alfoze/2.png"
+      "/test/images/10-alfoze/alfoze1-1.png",
+      "/test/images/10-alfoze/alfoze3.png",
+      "/test/images/10-alfoze/alfoze2-1.png",
+      "/test/images/10-alfoze/alfoze4-1.png"
     ]
   },
   {
@@ -227,12 +229,14 @@
       "caption1": "Valentine",
       "caption2": "2025, graphic design",
       "caption3": "-",
-      "caption4": "2025 graduation exhibition",
-      "caption5": "poster, book"
+      "caption4": "personal project",
+      "caption5": "postcard"
     },
     "images": [
-      "/test/images/11-valentine/1.png",
-      "/test/images/11-valentine/2.png"
+      "/test/images/11-valentine/valen5.png",
+      "/test/images/11-valentine/valen2-1.png",
+      "/test/images/11-valentine/valen1-1.png",
+      "/test/images/11-valentine/valen9.png"
     ]
   },
   {
@@ -244,12 +248,14 @@
       "caption1": "Forever",
       "caption2": "2025, graphic design",
       "caption3": "-",
-      "caption4": "2025 graduation exhibition",
-      "caption5": "poster, cd"
+      "caption4": "interview task",
+      "caption5": "2 types album, out box, photo book, ornament, cdr"
     },
     "images": [
-      "/test/images/12-forever/1.png",
-      "/test/images/12-forever/2.png"
+      "/test/images/12-Forever/forever1.png",
+      "/test/images/12-Forever/forever2.gif",
+      "/test/images/12-Forever/forever5.png",
+      "/test/images/12-Forever/forever7.png"
     ]
   },
   {
@@ -261,12 +267,18 @@
       "caption1": "Lov",
       "caption2": "2025, brand design",
       "caption3": "-",
-      "caption4": "2025 graduation exhibition",
-      "caption5": "package, poster"
+      "caption4": "client work",
+      "caption5": "brand system, logo, graphic, stuff"
     },
     "images": [
-      "/test/images/13-lov/1.png",
-      "/test/images/13-lov/2.png"
+      "/test/images/13-lov/lov1-1.png",
+      "/test/images/13-lov/lov2.png",
+      "/test/images/13-lov/lov10.png",
+      "/test/images/13-lov/lov8-1.png",
+      "/test/images/13-lov/lov12.png",
+      "/test/images/13-lov/lov4.png",
+      "/test/images/13-lov/lov5-1.png",
+      "/test/images/13-lov/lov6.png"
     ]
   },
   {
@@ -278,12 +290,17 @@
       "caption1": "Dreamscape",
       "caption2": "2025, graphic design",
       "caption3": "-",
-      "caption4": "2025 graduation exhibition",
-      "caption5": "poster, cd"
+      "caption4": "interview task",
+      "caption5": "2 types album, outbox, photobook, poster, stuff"
     },
     "images": [
-      "/test/images/14-dreamscape/1.png",
-      "/test/images/14-dreamscape/2.png"
+      "/test/images/14-dreamscape/1-1.png",
+      "/test/images/14-dreamscape/6.png",
+      "/test/images/14-dreamscape/7.png",
+      "/test/images/14-dreamscape/8.png",
+      "/test/images/14-dreamscape/10.png",
+      "/test/images/14-dreamscape/12.png",
+      "/test/images/14-dreamscape/11.png"
     ]
   }
 ]
