@@ -74,12 +74,17 @@
       "caption1": "An inverted realtionship",
       "caption2": "2023, editorial",
       "caption3": "-",
-      "caption4": "2023 graduation exhibition",
-      "caption5": "book, poster"
+      "caption4": "personal project",
+      "caption5": "research book"
     },
     "images": [
       "/test/images/4-inverted/1.png",
-      "/test/images/4-inverted/2.png"
+      "/test/images/4-inverted/2.png",
+      "/test/images/4-inverted/3.png",
+      "/test/images/4-inverted/4.png",
+      "/test/images/4-inverted/5.png",
+      "/test/images/4-inverted/6.png",
+      "/test/images/4-inverted/7.png",
     ]
   },
   {
@@ -91,12 +96,14 @@
       "caption1": "Immortality : The Death of Death",
       "caption2": "2024, brand design",
       "caption3": "-",
-      "caption4": "2024 graduation exhibition",
-      "caption5": "book, package"
+      "caption4": "personal project",
+      "caption5": "brochure, entrance bracelet, merchandise"
     },
     "images": [
-      "/test/images/5-immortality/1.png",
-      "/test/images/5-immortality/2.png"
+      "/test/images/5-immortality/1-1.png",
+      "/test/images/5-immortality/2-1.png",
+      "/test/images/5-immortality/3.png",
+      "/test/images/5-immortality/4-1.png"
     ]
   },
   {
