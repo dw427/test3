@@ -6,7 +6,7 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0" />
 
-  <title>dreamscape2ㅈ</title>
+  <title>dreamscape</title>
 
   <link rel="icon"
         type="image/png"
@@ -299,6 +299,11 @@
         height: 100%;
         width: auto;
       }
+      
+      .fixed-image {
+        border-left: none;
+        border-right: none;
+      }
     }
 
     @media (min-width: 769px) {
@@ -312,11 +317,12 @@
       .gallery-wrap {
         display: grid;
         height: 100%;
+        /* 합이 정확히 100%인 값으로 반올림/정리함(갭/헤어라인 제거 목적) */
         grid-template-columns:
-          23.02%
-          36.41%
-          17.55%
-          23.02%;
+          23%
+          36.4%
+          17.6%
+          23%;
         gap: 0;
       }
 
