@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>상세페이지1</title>
+  <title>0상세페이지1</title>
   
   <!-- Pretendard 웹폰트 연동 -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
@@ -41,14 +41,14 @@
       display: block;
     }
 
-    /* 메인 2열 분할 레이아웃 (헤더 55px 제외) */
+    /* 메인 2열 분할 레이아웃 (1920px 기준 좌우 각각 960px) */
     .container {
       display: flex;
       height: calc(100vh - 55px);
       width: 100vw;
     }
 
-    /* 좌측 영역 (독립 스크롤) */
+    /* 좌측 영역 (50% = 960px, 독립 스크롤) */
     .left-section {
       width: 50%;
       height: 100%;
@@ -62,7 +62,7 @@
       object-fit: cover;
     }
 
-    /* 우측 영역 (독립 스크롤) - 좌우 여백 63px, 하단 여백 70px */
+    /* 우측 영역 (50% = 960px, 좌우 여백 63px -> 내부 실제 너비 833px) */
     .right-section {
       width: 50%;
       height: 100%;
@@ -75,7 +75,6 @@
 
     .product-info-wrapper {
       width: 100%;
-      max-width: 833px; /* 1920*1080 기준 최대 너비 */
     }
 
     /* 우측 상품 이미지 컨테이너 */
@@ -151,13 +150,13 @@
 
     /* 토글/드롭다운 그룹 영역 */
     .toggle-group {
+      width: 100%;
       margin-bottom: 70px; /* 하단 버튼과의 간격 70px */
     }
 
-    /* 1. SIZE 박스: 화면 넘침 방지 반응형 적용 (최대 833px * 36px) 및 클릭 불가 처리 */
+    /* 1. SIZE 박스: 패딩 제외 833px 너비 x 36px 높이 네모 박스 및 클릭 불가 가라 버튼 */
     .size-select-box {
       width: 100%;
-      max-width: 833px;
       height: 36px;
       border: 1px solid #000;
       margin-bottom: 50px; /* SIZE 박스와 DETAIL INFO 사이 간격 50px */
@@ -176,18 +175,14 @@
       align-items: center;
       font-size: 15px;
       font-weight: 500;
-      cursor: default; /* 클릭 불가능한 상태 표기 */
+      cursor: default;
       color: #000;
     }
 
-    /* 2. DETAIL INFO & SIZE GUIDE 구분선 및 일반 토글 스타일 */
+    /* 2. DETAIL INFO & SIZE GUIDE: 라인 전면 제거 */
     .toggle-item:not(.size-select-box) {
-      border-top: 1px solid #000;
+      border: none;
       width: 100%;
-    }
-
-    .toggle-item:not(.size-select-box):last-child {
-      border-bottom: 1px solid #000;
     }
 
     /* 토글 헤더 */
@@ -348,7 +343,7 @@
             </button>
           </div>
 
-          <!-- 2. DETAIL INFO : 28x24 이미지 버튼 적용 -->
+          <!-- 2. DETAIL INFO : 위아래 라인 제거 및 28x24 이미지 버튼 적용 -->
           <div class="toggle-item">
             <button class="toggle-header" type="button">
               <span>DETAIL INFO</span>
@@ -386,7 +381,7 @@
             </div>
           </div>
 
-          <!-- 3. SIZE GUIDE : 28x24 이미지 버튼 적용 -->
+          <!-- 3. SIZE GUIDE : 위아래 라인 제거 및 28x24 이미지 버튼 적용 -->
           <div class="toggle-item">
             <button class="toggle-header" type="button">
               <span>SIZE GUIDE</span>
