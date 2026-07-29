@@ -3,436 +3,314 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Detail - Interactive Layout</title>
+  <title>상세페이지 - Hugyourskin</title>
   <style>
-    /* --------------------------------------------------
-       1. Base & Reset Styles
-    -------------------------------------------------- */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      color: #111;
-      background-color: #fff;
-      line-height: 1.5;
-    }
-
-    /* --------------------------------------------------
-       2. Header (헤더)
-    -------------------------------------------------- */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 40px;
-      border-bottom: 1px solid #eee;
-      position: sticky;
-      top: 0;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(5px);
-      z-index: 100;
-    }
-
-    .logo {
-      font-weight: 800;
-      font-size: 20px;
-      letter-spacing: -0.5px;
-    }
-
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 28px;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #111;
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .header-right {
-      display: flex;
-      gap: 20px;
-      font-size: 13px;
-      font-weight: 500;
-    }
-
-    /* --------------------------------------------------
-       3. Main Layout (좌/우 분할 레이아웃)
-    -------------------------------------------------- */
-    .detail-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: calc(100vh - 61px);
-    }
-
-    /* 좌측: 캠페인 룩북/스크롤 영역 */
-    .left-panel {
-      position: relative;
-      background-color: #f7f7f7;
+    body, html {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       overflow: hidden;
     }
 
-    .left-panel img {
+    /* 1. 1920*55 가라 헤더 (이미지 적용) */
+    header {
+      width: 100%;
+      height: 55px;
+      position: relative;
+      z-index: 10;
+      border-bottom: 1px solid #eee;
+      background-color: #fff;
+    }
+
+    header img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: cover; /* 1920*55 비율로 꽉 차게 표시 */
       display: block;
     }
 
-    /* 우측: 상품 옵션 및 드롭다운 영역 */
-    .right-panel {
-      padding: 50px 60px;
+    /* 메인 2열 분할 레이아웃 (전체 높이에서 헤더 55px 차감) */
+    .container {
+      display: flex;
+      height: calc(100vh - 55px);
+      width: 100vw;
+    }
+
+    /* 좌측 영역 (개별 스크롤) */
+    .left-section {
+      width: 50%;
+      height: 100%;
+      overflow-y: auto;
+      background-color: #f9f9f9;
+    }
+
+    .left-section img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* 우측 영역 (개별 스크롤) - 상단 여백 0 */
+    .right-section {
+      width: 50%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 0 60px 40px 60px;
       display: flex;
       flex-direction: column;
-      max-width: 650px;
-      width: 100%;
+      align-items: center;
     }
 
-    /* --------------------------------------------------
-       4. Image Gallery & Transition (핵심 애니메이션)
-    -------------------------------------------------- */
-    .gallery-container {
-      margin-bottom: 30px;
-      min-height: 380px;
+    .product-info-wrapper {
+      width: 100%;
+      max-width: 518px;
+    }
+
+    /* 2. 우측 상품 이미지 컨테이너 (헤더 바로 아래) */
+    .product-image-container {
+      width: 100%;
       display: flex;
+      justify-content: center;
       align-items: flex-start;
-    }
-
-    /* 메인 대형 이미지 박스 (초기 상태) */
-    .main-image-wrapper {
-      width: 320px;
-      height: 380px;
-      background-color: #f4f4f4;
-      border-radius: 4px;
-      overflow: hidden;
-      /* 크기 축소 애니메이션 핵심: Cubic-Bezier로 부드러운 감속 효과 */
-      transition: all 0.45s cubic-bezier(0.25, 1, 0.5, 1);
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .main-image-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* 아더 컬러 썸네일 박스 (초기 숨김 상태) */
-    .other-colors-wrapper {
-      display: flex;
       gap: 12px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateX(-10px);
-      transition: all 0.45s cubic-bezier(0.25, 1, 0.5, 1);
-      margin-left: 0;
-      width: 0;
-      overflow: hidden;
+      margin-bottom: 24px;
     }
 
-    .color-thumb {
-      width: 90px;
-      height: 110px;
-      background-color: #f4f4f4;
-      border-radius: 4px;
-      overflow: hidden;
-      cursor: pointer;
+    /* 메인 이미지 (기본 518x518) */
+    .main-image {
+      width: 518px;
+      height: 518px;
+      object-fit: contain;
       border: 1px solid transparent;
-      transition: border-color 0.2s ease;
-      flex-shrink: 0;
+      transition: width 0.35s ease, height 0.35s ease, border-color 0.35s ease;
     }
 
-    .color-thumb.active {
-      border-color: #111;
+    /* 아더 컬러 이미지 (기본 0x0 및 숨김) */
+    .other-color-image {
+      width: 0;
+      height: 0;
+      object-fit: contain;
+      opacity: 0;
+      border: 1px solid #ddd;
+      transition: width 0.35s ease, height 0.35s ease, opacity 0.35s ease;
     }
 
-    .color-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* --- [토글 오픈 시 적용되는 클래스 .is-open] --- */
+    /* ==============================================
+       토글 활성화 시 이미지 스타일 (100x100 변화)
+       ============================================== */
     
-    /* 1. 메인 이미지가 부드럽게 썸네일 크기로 축소 */
-    .gallery-container.is-open .main-image-wrapper {
-      width: 90px;
-      height: 110px;
+    .right-section.toggle-active .product-image-container {
+      justify-content: flex-start;
     }
 
-    /* 2. 숨겨진 아더 컬러 박스가 슬라이드되며 등장 */
-    .gallery-container.is-open .other-colors-wrapper {
+    .right-section.toggle-active .main-image {
+      width: 100px;
+      height: 100px;
+      border-color: #000;
+    }
+
+    .right-section.toggle-active .other-color-image {
+      width: 100px;
+      height: 100px;
       opacity: 1;
-      visibility: visible;
-      transform: translateX(0);
-      margin-left: 12px;
-      width: auto;
     }
 
-    /* --------------------------------------------------
-       5. Product Info & Accordion Toggles (토글 영역)
-    -------------------------------------------------- */
+    /* ============================================== */
+
+    /* 상품명 & 가격 */
     .product-title {
-      font-size: 18px;
+      font-size: 0.95rem;
       font-weight: 700;
       margin-bottom: 6px;
     }
 
     .product-price {
-      font-size: 16px;
-      font-weight: 500;
-      color: #333;
-      margin-bottom: 28px;
-    }
-
-    .select-box {
-      width: 100%;
-      padding: 14px 16px;
-      border: 1px solid #111;
-      background: #fff;
-      font-size: 13px;
+      font-size: 0.9rem;
       font-weight: 600;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
       margin-bottom: 24px;
     }
 
-    /* 아코디언/드롭다운 토글 박스 */
-    .accordion-item {
-      border-top: 1px solid #e5e5e5;
+    /* 토글/드롭다운 스타일 */
+    .toggle-group {
+      border-top: 1px solid #000;
+      border-bottom: 1px solid #000;
+      margin-bottom: 20px;
     }
 
-    .accordion-item:last-of-type {
-      border-bottom: 1px solid #e5e5e5;
+    .toggle-item {
+      border-bottom: 1px solid #eee;
     }
 
-    .accordion-header {
-      padding: 18px 0;
+    .toggle-item:last-child {
+      border-bottom: none;
+    }
+
+    .toggle-header {
+      width: 100%;
+      padding: 14px 0;
+      background: none;
+      border: none;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      cursor: pointer;
-      font-size: 13px;
+      font-size: 0.8rem;
       font-weight: 700;
-      letter-spacing: 0.5px;
+      cursor: pointer;
+      text-align: left;
     }
 
-    .accordion-icon {
+    .toggle-icon {
+      font-size: 0.7rem;
       transition: transform 0.3s ease;
-      font-size: 11px;
     }
 
-    .accordion-item.active .accordion-icon {
+    .toggle-content {
+      max-height: 0;
+      overflow: hidden;
+      font-size: 0.75rem;
+      line-height: 1.6;
+      color: #333;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+
+    .toggle-item.open .toggle-content {
+      max-height: 300px;
+      padding-bottom: 16px;
+    }
+
+    .toggle-item.open .toggle-icon {
       transform: rotate(180deg);
     }
 
-    .accordion-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.45s cubic-bezier(0.25, 1, 0.5, 1), padding 0.3s ease;
-      font-size: 12px;
-      color: #555;
-      line-height: 1.8;
-    }
-
-    .accordion-item.active .accordion-content {
-      max-height: 500px;
-      padding-bottom: 20px;
-    }
-
-    .accordion-content ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .accordion-content li {
-      margin-bottom: 6px;
-    }
-
-    /* 구매 버튼 */
-    .button-group {
+    /* 버튼 스타일 */
+    .btn-group {
       display: flex;
-      gap: 10px;
-      margin-top: 32px;
+      gap: 8px;
+      margin-top: 20px;
     }
 
     .btn {
       flex: 1;
-      padding: 16px 0;
-      font-size: 13px;
+      padding: 14px 0;
+      font-size: 0.8rem;
       font-weight: 700;
-      text-align: center;
+      border: 1px solid #000;
+      background-color: #fff;
       cursor: pointer;
-      border: none;
-      letter-spacing: 0.5px;
+      text-align: center;
     }
 
     .btn-buy {
-      background-color: #e2e2e2;
-      color: #111;
-    }
-
-    .btn-cart {
-      background-color: #fff;
-      color: #111;
-      border: 1px solid #111;
-    }
-
-    /* 반응형 레이아웃 */
-    @media (max-width: 900px) {
-      .detail-container {
-        grid-template-columns: 1fr;
-      }
-      .right-panel {
-        padding: 30px 20px;
-      }
+      background-color: #e5e5e5;
+      border-color: #e5e5e5;
     }
   </style>
 </head>
 <body>
 
-  <!-- 상단 헤더 -->
+  <!-- 1920*55 가라 헤더 이미지 -->
   <header>
-    <div class="logo">hugyour skin</div>
-    <nav>
-      <ul>
-        <li><a href="#">Shop</a></li>
-        <li><a href="#">Collaboration</a></li>
-        <li><a href="#">Collection</a></li>
-        <li><a href="#">offline</a></li>
-        <li><a href="#">Community</a></li>
-      </ul>
-    </nav>
-    <div class="header-right">
-      <span>Search</span>
-      <span>My page</span>
-      <span>Cart</span>
-      <span>ENG</span>
-    </div>
+    <img src="images/header.jpg" alt="Header Navigation">
   </header>
 
-  <!-- 메인 레이아웃 -->
-  <div class="detail-container">
+  <div class="container">
     
-    <!-- 좌측: 메인 캠페인 스크롤 영역 -->
-    <div class="left-panel">
-      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=80" alt="Campaign Model">
+    <!-- 좌측 영역: 캠페인/룩북 이미지들 -->
+    <div class="left-section">
+      <img src="images/campaign1.jpg" alt="Campaign Image 1">
+      <img src="images/campaign2.jpg" alt="Campaign Image 2">
     </div>
 
-    <!-- 우측: 옵션 및 인터랙션 영역 -->
-    <div class="right-panel">
-      
-      <!-- 상단 갤러리 (토글 클릭 시 애니메이션 작동 영역) -->
-      <div class="gallery-container" id="galleryContainer">
-        <!-- 현재 컬러 메인 이미지 (크기가 줄어듦) -->
-        <div class="main-image-wrapper">
-          <img id="mainImg" src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=600&q=80" alt="Cardigan Ivory">
+    <!-- 우측 영역: 메인/아더컬러 상품 이미지 및 정보 -->
+    <div class="right-section" id="rightSection">
+      <div class="product-info-wrapper">
+        
+        <div class="product-image-container">
+          <!-- 메인 상품 이미지 -->
+          <img src="images/product_main.jpg" alt="Product Main (Ivory)" class="main-image">
+          <!-- 아더 컬러 상품 이미지 -->
+          <img src="images/product_other.jpg" alt="Product Other (Gray)" class="other-color-image">
         </div>
 
-        <!-- 현재 컬러 + 아더 컬러 썸네일 (토글 시 부드럽게 등장) -->
-        <div class="other-colors-wrapper">
-          <div class="color-thumb active" onclick="switchColor(this, 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=600&q=80')">
-            <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=600&q=80" alt="Ivory">
+        <div class="product-title">Pointelle knit cardigan (Ivory)</div>
+        <div class="product-price">98,000원</div>
+
+        <div class="toggle-group">
+          
+          <div class="toggle-item">
+            <button class="toggle-header">
+              <span>SIZE</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="toggle-content">
+              FREE (어깨 38 / 가슴 42 / 소매 18 / 총장 52 cm)
+            </div>
           </div>
-          <div class="color-thumb" onclick="switchColor(this, 'https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=600&q=80')">
-            <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=600&q=80" alt="Grey">
+
+          <div class="toggle-item">
+            <button class="toggle-header">
+              <span>DETAIL INFO</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="toggle-content">
+              자수 포인트 코튼 카디건 탑<br><br>
+              * 코튼 소재로 편안한 착용감<br>
+              * 페이크 플랩 포켓 디자인과 조절 가능한 스트랩 디테일
+            </div>
           </div>
+
+          <div class="toggle-item">
+            <button class="toggle-header">
+              <span>SIZE GUIDE</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="toggle-content">
+              정사이즈 착용을 권장합니다.
+            </div>
+          </div>
+
         </div>
-      </div>
 
-      <!-- 상품명 및 가격 -->
-      <h1 class="product-title">Pointelle knit cardigan (Ivory)</h1>
-      <div class="product-price">98,000원</div>
-
-      <!-- 드롭다운 드롭다운 (옵션) -->
-      <div class="select-box">
-        <span>SIZE</span>
-        <span>▼</span>
-      </div>
-
-      <!-- 토글 박스 1: DETAIL INFO -->
-      <div class="accordion-item" id="detailAccordion">
-        <div class="accordion-header" onclick="toggleAccordion('detailAccordion')">
-          <span>DETAIL INFO</span>
-          <span class="accordion-icon">▼</span>
+        <div class="btn-group">
+          <button class="btn btn-buy">BUY IT NOW</button>
+          <button class="btn">ADD TO CART</button>
         </div>
-        <div class="accordion-content">
-          <p>자수 포인트 코튼 카디건 톱스</p>
-          <br>
-          <ul>
-            <li>* 코튼 소재로 편안한 착용감</li>
-            <li>* 페이크 클로징 처리 디자인과 조절 가능한 스트랩 디테일</li>
-            <li>* 밑단 스트링 디테일로 다양한 실루엣 연출</li>
-            <li>* 전·후면 포켓과 D링 디테일, 후면 배색 자수 및 스티치 포인트</li>
-          </ul>
-          <br>
-          <p><strong>TEXTURE Shell</strong><br>- Cotton 100% Lining<br>- Polyester 80% Cotton 20%</p>
-        </div>
-      </div>
 
-      <!-- 토글 박스 2: SIZE GUIDE -->
-      <div class="accordion-item" id="sizeGuideAccordion">
-        <div class="accordion-header" onclick="toggleAccordion('sizeGuideAccordion')">
-          <span>SIZE GUIDE</span>
-          <span class="accordion-icon">▼</span>
-        </div>
-        <div class="accordion-content">
-          <p>FREE SIZE: 어깨 38cm / 가슴 42cm / 암홀 20cm / 총장 50cm</p>
-        </div>
       </div>
-
-      <!-- 하단 버튼 -->
-      <div class="button-group">
-        <button class="btn btn-buy">BUY IT NOW</button>
-        <button class="btn btn-cart">ADD TO CART</button>
-      </div>
-
     </div>
+
   </div>
 
-  <!-- --------------------------------------------------
-       6. JavaScript (토글 및 이미지 교체 제어)
-  -------------------------------------------------- -->
   <script>
-    // 토글 박스 클릭 이벤트
-    function toggleAccordion(id) {
-      const targetItem = document.getElementById(id);
-      const gallery = document.getElementById('galleryContainer');
-      const allItems = document.querySelectorAll('.accordion-item');
+    const rightSection = document.getElementById('rightSection');
+    const toggleItems = document.querySelectorAll('.toggle-item');
 
-      const isActive = targetItem.classList.contains('active');
-
-      // 다른 토글 닫기
-      allItems.forEach(item => item.classList.remove('active'));
-
-      if (!isActive) {
-        // 클릭한 토글 열기 & 상단 이미지 축소 애니메이션 활성화
-        targetItem.classList.add('active');
-        gallery.classList.add('is-open');
-      } else {
-        // 열린 토글을 닫을 때 (모든 토글이 닫히면 원래 큰 이미지로 원복)
-        const anyActive = Array.from(allItems).some(item => item.classList.contains('active'));
-        if (!anyActive) {
-          gallery.classList.remove('is-open');
+    toggleItems.forEach(item => {
+      const header = item.querySelector('.toggle-header');
+      
+      header.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        
+        if (isOpen) {
+          item.classList.remove('open');
+        } else {
+          item.classList.add('open');
         }
-      }
-    }
 
-    // 썸네일 클릭 시 메인 이미지 전환
-    function switchColor(element, imgSrc) {
-      document.getElementById('mainImg').src = imgSrc;
-      document.querySelectorAll('.color-thumb').forEach(thumb => thumb.classList.remove('active'));
-      element.classList.add('active');
-    }
+        const hasOpenItem = document.querySelector('.toggle-item.open') !== null;
+
+        if (hasOpenItem) {
+          rightSection.classList.add('toggle-active');
+        } else {
+          rightSection.classList.remove('toggle-active');
+        }
+      });
+    });
   </script>
 </body>
 </html>
