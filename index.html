@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>0상세페이지1</title>
+  <title>상세페이지1</title>
   
   <!-- Pretendard 웹폰트 연동 -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
@@ -75,7 +75,7 @@
 
     .product-info-wrapper {
       width: 100%;
-      max-width: 833px; /* 1920*1080 와이어프레임 기준 너비 (833px) */
+      max-width: 833px; /* 1920*1080 기준 최대 너비 */
     }
 
     /* 우측 상품 이미지 컨테이너 */
@@ -89,10 +89,12 @@
       transition: margin-top 0.35s ease, margin-bottom 0.35s ease;
     }
 
-    /* 메인 이미지 (픽셀 고정값 적용으로 부드러운 애니메이션 구현) */
+    /* 메인 이미지 */
     .main-image {
       width: 518px;
-      height: 518px;
+      max-width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
       object-fit: contain;
       border: 1px solid transparent;
       transition: width 0.35s ease, height 0.35s ease, border-color 0.35s ease;
@@ -152,13 +154,15 @@
       margin-bottom: 70px; /* 하단 버튼과의 간격 70px */
     }
 
-    /* 1. SIZE 박스: 833*36px, 1px 네모 테두리 스타일 */
+    /* 1. SIZE 박스: 화면 넘침 방지 반응형 적용 (최대 833px * 36px) 및 클릭 불가 처리 */
     .size-select-box {
-      width: 833px;
+      width: 100%;
+      max-width: 833px;
       height: 36px;
       border: 1px solid #000;
       margin-bottom: 50px; /* SIZE 박스와 DETAIL INFO 사이 간격 50px */
       background: #fff;
+      pointer-events: none; /* 클릭 이벤트 차단 */
     }
 
     .size-select-box .toggle-header {
@@ -172,13 +176,14 @@
       align-items: center;
       font-size: 15px;
       font-weight: 500;
-      cursor: pointer;
+      cursor: default; /* 클릭 불가능한 상태 표기 */
       color: #000;
     }
 
     /* 2. DETAIL INFO & SIZE GUIDE 구분선 및 일반 토글 스타일 */
     .toggle-item:not(.size-select-box) {
       border-top: 1px solid #000;
+      width: 100%;
     }
 
     .toggle-item:not(.size-select-box):last-child {
@@ -335,22 +340,18 @@
 
         <div class="toggle-group">
           
-          <!-- 1. SIZE : 833*36px, 1px 네모 테두리 박스 -->
+          <!-- 1. SIZE : 가라 버튼 (클릭 안 됨, 상원래 박스 형태 유지) -->
           <div class="toggle-item size-select-box">
-            <button class="toggle-header">
+            <button class="toggle-header" type="button">
               <span>SIZE</span>
               <span class="toggle-icon">▲</span>
             </button>
-            <div class="toggle-content">
-              FREE (어깨 38 / 가슴 42 / 소매 18 / 총장 52 cm)
-            </div>
           </div>
 
           <!-- 2. DETAIL INFO : 28x24 이미지 버튼 적용 -->
           <div class="toggle-item">
-            <button class="toggle-header">
+            <button class="toggle-header" type="button">
               <span>DETAIL INFO</span>
-              <!-- toggle_icon.png 경로를 실제 아이콘 이미지 경로로 수정하여 사용하세요 -->
               <img src="images/toggle_icon.png" alt="Toggle Icon" class="toggle-icon-img">
             </button>
             <div class="toggle-content">
@@ -387,9 +388,8 @@
 
           <!-- 3. SIZE GUIDE : 28x24 이미지 버튼 적용 -->
           <div class="toggle-item">
-            <button class="toggle-header">
+            <button class="toggle-header" type="button">
               <span>SIZE GUIDE</span>
-              <!-- toggle_icon.png 경로를 실제 아이콘 이미지 경로로 수정하여 사용하세요 -->
               <img src="images/toggle_icon.png" alt="Toggle Icon" class="toggle-icon-img">
             </button>
             <div class="toggle-content">
@@ -411,7 +411,8 @@
 
   <script>
     const rightSection = document.getElementById('rightSection');
-    const toggleItems = document.querySelectorAll('.toggle-item');
+    /* size-select-box를 제외한 실제 토글 버튼에만 이벤트 등록 */
+    const toggleItems = document.querySelectorAll('.toggle-item:not(.size-select-box)');
 
     toggleItems.forEach(item => {
       const header = item.querySelector('.toggle-header');
