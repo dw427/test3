@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>상세페이지</title>
+  <title>0상세페이지1</title>
   
   <!-- Pretendard 웹폰트 연동 -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
@@ -75,7 +75,7 @@
 
     .product-info-wrapper {
       width: 100%;
-      max-width: 518px;
+      max-width: 833px; /* 1920*1080 와이어프레임 기준 너비 (833px) */
     }
 
     /* 우측 상품 이미지 컨테이너 */
@@ -147,22 +147,45 @@
       color: #000;
     }
 
-    /* 토글/드롭다운 스타일 */
+    /* 토글/드롭다운 그룹 영역 */
     .toggle-group {
-      border-top: 1px solid #000;
-      border-bottom: 1px solid #000;
       margin-bottom: 70px; /* 하단 버튼과의 간격 70px */
     }
 
-    .toggle-item {
-      border-bottom: 1px solid #eee;
+    /* 1. SIZE 박스: 833*36px, 1px 네모 테두리 스타일 */
+    .size-select-box {
+      width: 833px;
+      height: 36px;
+      border: 1px solid #000;
+      margin-bottom: 50px; /* SIZE 박스와 DETAIL INFO 사이 간격 50px */
+      background: #fff;
     }
 
-    .toggle-item:last-child {
-      border-bottom: none;
+    .size-select-box .toggle-header {
+      width: 100%;
+      height: 100%;
+      padding: 0 12px;
+      background: none;
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      color: #000;
     }
 
-    /* 토글 헤더 (15px / Medium) */
+    /* 2. DETAIL INFO & SIZE GUIDE 구분선 및 일반 토글 스타일 */
+    .toggle-item:not(.size-select-box) {
+      border-top: 1px solid #000;
+    }
+
+    .toggle-item:not(.size-select-box):last-child {
+      border-bottom: 1px solid #000;
+    }
+
+    /* 토글 헤더 */
     .toggle-header {
       width: 100%;
       padding: 16px 0;
@@ -180,6 +203,18 @@
 
     .toggle-icon {
       font-size: 10px;
+      transition: transform 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 28x24 이미지 아이콘 전용 스타일 */
+    .toggle-icon-img {
+      width: 28px;
+      height: 24px;
+      object-fit: contain;
+      display: block;
       transition: transform 0.3s ease;
     }
 
@@ -199,7 +234,9 @@
       padding-bottom: 33px; /* 설명 밑 간격 33px */
     }
 
-    .toggle-item.open .toggle-icon {
+    /* 회전 애니메이션 */
+    .toggle-item.open .toggle-icon,
+    .toggle-item.open .toggle-icon-img {
       transform: rotate(180deg);
     }
 
@@ -247,6 +284,7 @@
     .btn-group {
       display: flex;
       gap: 8px;
+      width: 100%;
     }
 
     .btn {
@@ -297,8 +335,8 @@
 
         <div class="toggle-group">
           
-          <!-- SIZE -->
-          <div class="toggle-item">
+          <!-- 1. SIZE : 833*36px, 1px 네모 테두리 박스 -->
+          <div class="toggle-item size-select-box">
             <button class="toggle-header">
               <span>SIZE</span>
               <span class="toggle-icon">▲</span>
@@ -308,11 +346,12 @@
             </div>
           </div>
 
-          <!-- DETAIL INFO -->
+          <!-- 2. DETAIL INFO : 28x24 이미지 버튼 적용 -->
           <div class="toggle-item">
             <button class="toggle-header">
               <span>DETAIL INFO</span>
-              <span class="toggle-icon">▲</span>
+              <!-- toggle_icon.png 경로를 실제 아이콘 이미지 경로로 수정하여 사용하세요 -->
+              <img src="images/toggle_icon.png" alt="Toggle Icon" class="toggle-icon-img">
             </button>
             <div class="toggle-content">
               <div class="detail-text-block">
@@ -346,11 +385,12 @@
             </div>
           </div>
 
-          <!-- SIZE GUIDE -->
+          <!-- 3. SIZE GUIDE : 28x24 이미지 버튼 적용 -->
           <div class="toggle-item">
             <button class="toggle-header">
               <span>SIZE GUIDE</span>
-              <span class="toggle-icon">▲</span>
+              <!-- toggle_icon.png 경로를 실제 아이콘 이미지 경로로 수정하여 사용하세요 -->
+              <img src="images/toggle_icon.png" alt="Toggle Icon" class="toggle-icon-img">
             </button>
             <div class="toggle-content">
               정사이즈 착용을 권장합니다.
@@ -397,5 +437,3 @@
   </script>
 </body>
 </html>
-
-```
