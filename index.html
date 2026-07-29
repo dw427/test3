@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ㄴ상세페이지1</title>
+  <title>상세페이지</title>
   
   <!-- Pretendard 웹폰트 연동 -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
@@ -89,22 +89,28 @@
     .product-image-container {
       width: 100%;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start; /* 좌측 기준 고정 후 마진으로 중앙 배치 */
       align-items: flex-start;
       gap: 12px;
+      margin-top: 0;
       margin-bottom: 0;
-      transition: margin-top 0.35s ease, margin-bottom 0.35s ease;
+      transition: margin-top 0.4s cubic-bezier(0.25, 1, 0.5, 1), margin-bottom 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
-    /* 메인 이미지 기본 설정 */
+    /* 메인 이미지: 자연스러운 트랜지션 적용 */
     .main-image {
-      width: 450px; /* 맥북 환경 고려해 기본 너비 살짝 조절 */
-      max-width: 100%;
-      height: auto;
-      aspect-ratio: 1 / 1;
+      width: 450px;
+      height: 450px;
       object-fit: contain;
       border: 1px solid transparent;
-      transition: width 0.35s ease, height 0.35s ease, border-color 0.35s ease;
+
+      /* 가운데 정렬을 위한 마진 계산: (전체 833px - 이미지 450px) / 2 = 약 191px */
+      margin-left: calc((100% - 450px) / 2);
+
+      transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                  height 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                  margin-left 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+                  border-color 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     /* 아더 컬러 이미지 */
@@ -114,12 +120,16 @@
       object-fit: contain;
       opacity: 0;
       border: 1px solid #ddd;
-      transition: width 0.35s ease, height 0.35s ease, opacity 0.35s ease;
+      transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                  height 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                  opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
-    /* 토글 활성화 시 변형 */
+    /* ==============================================
+       토글 활성화 시 자연스러운 전환
+       ============================================== */
+    
     .right-section.toggle-active .product-image-container {
-      justify-content: flex-start;
       margin-top: 40px;
       margin-bottom: 24px;
     }
@@ -127,6 +137,7 @@
     .right-section.toggle-active .main-image {
       width: 100px;
       height: 100px;
+      margin-left: 0; /* 좌측 정렬로 부드럽게 이동 */
       border-color: #000;
     }
 
@@ -301,24 +312,29 @@
       border-color: #e5e5e5;
     }
 
-    /* =========================================================
-       [반응형] 브라우저 높이가 900px 이하(맥북 등)일 때 자동 축소
-       ========================================================= */
+    /* 반응형 (맥북 및 낮은 높이 해상도 대응) */
     @media (max-height: 900px) {
       .main-image {
-        width: 360px; /* 이미지 크기 축소 */
+        width: 360px;
+        height: 360px;
+        margin-left: calc((100% - 360px) / 2);
+      }
+      .right-section.toggle-active .main-image {
+        width: 100px;
+        height: 100px;
+        margin-left: 0;
       }
       .product-price {
-        margin-bottom: 24px; /* 가격 하단 간격 축소 */
+        margin-bottom: 24px;
       }
       .size-select-box {
-        margin-bottom: 24px; /* SIZE 박스 간격 축소 */
+        margin-bottom: 24px;
       }
       .toggle-group {
-        margin-bottom: 30px; /* 토글 그룹 간격 축소 */
+        margin-bottom: 30px;
       }
       .btn {
-        padding: 13px 0; /* 버튼 높이 축소 */
+        padding: 13px 0;
       }
     }
   </style>
