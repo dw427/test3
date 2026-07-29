@@ -1,257 +1,438 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>test3</title>
-  <link rel="icon" type="image/png" href="/alfoze/images/fav.png" />
-  <link rel="apple-touch-icon" href="/alfoze/images/fav.png" />
-  <meta name="theme-color" content="#ffffff" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Detail - Interactive Layout</title>
   <style>
-    @import url("https://use.typekit.net/zuk4pzv.css");
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: "minion-pro", serif; background: #fff; }
-
-    a { color: inherit; text-decoration: none; transition: color .3s; }
-    a:hover { color: #a3a3a3; }
-
-    .footer {
-      width: 100%;
-      height: 100px;
-      background: transparent;
-      z-index: 1000;
+    /* --------------------------------------------------
+       1. Base & Reset Styles
+    -------------------------------------------------- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    .footer .right-link,
-    .footer .contact-link,
-    .footer #listButton {
-      position: absolute; bottom: 10px; font-size: 12px;
-    }
-    .footer .right-link { left: 30px; }
-    .footer .contact-link { left: 170px; }
-    .footer #listButton { right: 30px; cursor: pointer; }
-    .footer #listButton:hover { color: #a3a3a3; }
 
-    .slide-box {
-      position: fixed; top: 0; right: 0;
-      width: 373px !important; max-width: 100%; height: 100%;
-      background: #fff; z-index: 3000;
-      transform: translateX(100%); transition: transform .3s;
-      overflow-y: auto;
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #111;
+      background-color: #fff;
+      line-height: 1.5;
     }
-    .slide-box.active { transform: translateX(0); }
-    .slide-box .slide-list {
-      position: absolute; bottom: 10px; right: 30px;
-      font-size: 12px; cursor: pointer; transition: color .3s; z-index: 4001;
-    }
-    .slide-box .slide-list:hover { color: #a3a3a3; }
 
-    .text-group {
-      display: flex; align-items: center;
-      font-size: 12px; padding: 10px 0; white-space: nowrap;
+    /* --------------------------------------------------
+       2. Header (헤더)
+    -------------------------------------------------- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+      z-index: 100;
     }
-    .text1 { margin-left: 10px; }
-    .text2 { margin-left: auto; margin-right: 60px; text-align: right; }
-    .text3 { margin-right: 10px; flex-shrink: 0; }
 
-    .content {
+    .logo {
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 28px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #111;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .header-right {
+      display: flex;
+      gap: 20px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* --------------------------------------------------
+       3. Main Layout (좌/우 분할 레이아웃)
+    -------------------------------------------------- */
+    .detail-container {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 61px);
     }
-    .thumbnail {
-      display: flex; flex-direction: column; color: inherit;
+
+    /* 좌측: 캠페인 룩북/스크롤 영역 */
+    .left-panel {
+      position: relative;
+      background-color: #f7f7f7;
+      overflow: hidden;
     }
-    .thumbnail img {
-      width: 100%; height: auto; object-fit: cover; display: block;
+
+    .left-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
-    .caption {
-      display: flex; flex-direction: column;
-      margin-top: 8px; font-size: 12px;
+
+    /* 우측: 상품 옵션 및 드롭다운 영역 */
+    .right-panel {
+      padding: 50px 60px;
+      display: flex;
+      flex-direction: column;
+      max-width: 650px;
+      width: 100%;
+    }
+
+    /* --------------------------------------------------
+       4. Image Gallery & Transition (핵심 애니메이션)
+    -------------------------------------------------- */
+    .gallery-container {
+      margin-bottom: 30px;
+      min-height: 380px;
+      display: flex;
       align-items: flex-start;
     }
-    .caption .title { margin-bottom: 0; }
-    .caption .category-year {
-      display: flex; align-items: center;
-    }
-    .caption .category { margin-right: 10px; }
 
-    ::-webkit-scrollbar { display: none; }
-
-    .scroll-area, .fixed-image {
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-
-    .header {
-      display: none;
+    /* 메인 대형 이미지 박스 (초기 상태) */
+    .main-image-wrapper {
+      width: 320px;
+      height: 380px;
+      background-color: #f4f4f4;
+      border-radius: 4px;
+      overflow: hidden;
+      /* 크기 축소 애니메이션 핵심: Cubic-Bezier로 부드러운 감속 효과 */
+      transition: all 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+      position: relative;
+      flex-shrink: 0;
     }
 
-    @media (max-width: 768px) {
-      .side { display: none; }
-      .fixed-image { display: none; }
-      .content {
-        grid-template-columns: repeat(2, 1fr);
-        column-gap: 0;
-        row-gap: 0;
-        padding: 0;
-      }
-      .thumbnail {
-        width: 100%;
-        margin-bottom: 0;
-      }
-      .thumbnail img {
-        width: 100%;
-        height: auto;
-      }
-      .caption {
-        margin: 8px 0;
-      }
-      .footer {
-        position: relative;
-        height: 100px;
-      }
-      .footer .right-link { bottom: 20px; left: 20px; }
-      .footer .contact-link { bottom: 20px; left: 160px; }
-      .footer #listButton { bottom: 20px; right: 20px; }
-      .slide-box { width: 100% !important; }
-      .slide-box .slide-list { bottom: 20px; right: 20px; }
-
-      .header {
-        width: 100%;
-        height: 60px;
-        background: #ffffff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-      }
-
-      .header img {
-        height: 100%;
-        width: auto;
-      }
+    .main-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    @media (min-width: 769px) {
-      body, html {
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
+    /* 아더 컬러 썸네일 박스 (초기 숨김 상태) */
+    .other-colors-wrapper {
+      display: flex;
+      gap: 12px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-10px);
+      transition: all 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+      margin-left: 0;
+      width: 0;
+      overflow: hidden;
+    }
+
+    .color-thumb {
+      width: 90px;
+      height: 110px;
+      background-color: #f4f4f4;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: border-color 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .color-thumb.active {
+      border-color: #111;
+    }
+
+    .color-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* --- [토글 오픈 시 적용되는 클래스 .is-open] --- */
+    
+    /* 1. 메인 이미지가 부드럽게 썸네일 크기로 축소 */
+    .gallery-container.is-open .main-image-wrapper {
+      width: 90px;
+      height: 110px;
+    }
+
+    /* 2. 숨겨진 아더 컬러 박스가 슬라이드되며 등장 */
+    .gallery-container.is-open .other-colors-wrapper {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+      margin-left: 12px;
+      width: auto;
+    }
+
+    /* --------------------------------------------------
+       5. Product Info & Accordion Toggles (토글 영역)
+    -------------------------------------------------- */
+    .product-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .product-price {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 28px;
+    }
+
+    .select-box {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #111;
+      background: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      margin-bottom: 24px;
+    }
+
+    /* 아코디언/드롭다운 토글 박스 */
+    .accordion-item {
+      border-top: 1px solid #e5e5e5;
+    }
+
+    .accordion-item:last-of-type {
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .accordion-header {
+      padding: 18px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .accordion-icon {
+      transition: transform 0.3s ease;
+      font-size: 11px;
+    }
+
+    .accordion-item.active .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.25, 1, 0.5, 1), padding 0.3s ease;
+      font-size: 12px;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    .accordion-item.active .accordion-content {
+      max-height: 500px;
+      padding-bottom: 20px;
+    }
+
+    .accordion-content ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .accordion-content li {
+      margin-bottom: 6px;
+    }
+
+    /* 구매 버튼 */
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 32px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 16px 0;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-buy {
+      background-color: #e2e2e2;
+      color: #111;
+    }
+
+    .btn-cart {
+      background-color: #fff;
+      color: #111;
+      border: 1px solid #111;
+    }
+
+    /* 반응형 레이아웃 */
+    @media (max-width: 900px) {
+      .detail-container {
+        grid-template-columns: 1fr;
       }
-      .gallery-wrap {
-        width: 765px;
-        height: 100%;
-        margin: 0 auto;
-        display: flex;
-      }
-      .fixed-image {
-        width: 500px;
-        height: 100%;
-        position: sticky;
-        top: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-      }
-      .fixed-image img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-      }
-      .scroll-area {
-        width: 265px;
-        height: 100vh;
-        overflow-y: scroll;
-        border-left: 1px solid #9fa0a0;
-        border-right: 1px solid #9fa0a0;
-      }
-      .content {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0;
-      }
-      .thumbnail {
-        margin-bottom: 8px;
-        width: 100%;
+      .right-panel {
+        padding: 30px 20px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="header">
-    <img src="images/header.png" alt="header" />
-  </div>
 
-  <div class="gallery-wrap">
-    <div class="fixed-image">
-      <img src="images/index.png" alt="index" />
+  <!-- 상단 헤더 -->
+  <header>
+    <div class="logo">hugyour skin</div>
+    <nav>
+      <ul>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">Collaboration</a></li>
+        <li><a href="#">Collection</a></li>
+        <li><a href="#">offline</a></li>
+        <li><a href="#">Community</a></li>
+      </ul>
+    </nav>
+    <div class="header-right">
+      <span>Search</span>
+      <span>My page</span>
+      <span>Cart</span>
+      <span>ENG</span>
     </div>
-    <div class="scroll-area">
-      <div class="content" id="gallery"></div>
+  </header>
+
+  <!-- 메인 레이아웃 -->
+  <div class="detail-container">
+    
+    <!-- 좌측: 메인 캠페인 스크롤 영역 -->
+    <div class="left-panel">
+      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=80" alt="Campaign Model">
+    </div>
+
+    <!-- 우측: 옵션 및 인터랙션 영역 -->
+    <div class="right-panel">
+      
+      <!-- 상단 갤러리 (토글 클릭 시 애니메이션 작동 영역) -->
+      <div class="gallery-container" id="galleryContainer">
+        <!-- 현재 컬러 메인 이미지 (크기가 줄어듦) -->
+        <div class="main-image-wrapper">
+          <img id="mainImg" src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=600&q=80" alt="Cardigan Ivory">
+        </div>
+
+        <!-- 현재 컬러 + 아더 컬러 썸네일 (토글 시 부드럽게 등장) -->
+        <div class="other-colors-wrapper">
+          <div class="color-thumb active" onclick="switchColor(this, 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=600&q=80')">
+            <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=600&q=80" alt="Ivory">
+          </div>
+          <div class="color-thumb" onclick="switchColor(this, 'https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=600&q=80')">
+            <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=600&q=80" alt="Grey">
+          </div>
+        </div>
+      </div>
+
+      <!-- 상품명 및 가격 -->
+      <h1 class="product-title">Pointelle knit cardigan (Ivory)</h1>
+      <div class="product-price">98,000원</div>
+
+      <!-- 드롭다운 드롭다운 (옵션) -->
+      <div class="select-box">
+        <span>SIZE</span>
+        <span>▼</span>
+      </div>
+
+      <!-- 토글 박스 1: DETAIL INFO -->
+      <div class="accordion-item" id="detailAccordion">
+        <div class="accordion-header" onclick="toggleAccordion('detailAccordion')">
+          <span>DETAIL INFO</span>
+          <span class="accordion-icon">▼</span>
+        </div>
+        <div class="accordion-content">
+          <p>자수 포인트 코튼 카디건 톱스</p>
+          <br>
+          <ul>
+            <li>* 코튼 소재로 편안한 착용감</li>
+            <li>* 페이크 클로징 처리 디자인과 조절 가능한 스트랩 디테일</li>
+            <li>* 밑단 스트링 디테일로 다양한 실루엣 연출</li>
+            <li>* 전·후면 포켓과 D링 디테일, 후면 배색 자수 및 스티치 포인트</li>
+          </ul>
+          <br>
+          <p><strong>TEXTURE Shell</strong><br>- Cotton 100% Lining<br>- Polyester 80% Cotton 20%</p>
+        </div>
+      </div>
+
+      <!-- 토글 박스 2: SIZE GUIDE -->
+      <div class="accordion-item" id="sizeGuideAccordion">
+        <div class="accordion-header" onclick="toggleAccordion('sizeGuideAccordion')">
+          <span>SIZE GUIDE</span>
+          <span class="accordion-icon">▼</span>
+        </div>
+        <div class="accordion-content">
+          <p>FREE SIZE: 어깨 38cm / 가슴 42cm / 암홀 20cm / 총장 50cm</p>
+        </div>
+      </div>
+
+      <!-- 하단 버튼 -->
+      <div class="button-group">
+        <button class="btn btn-buy">BUY IT NOW</button>
+        <button class="btn btn-cart">ADD TO CART</button>
+      </div>
+
     </div>
   </div>
 
-  <div class="footer">
-    <div class="right-link"><a href="https://instagram.com/alfoxze" target="_blank">@alfoxze</a></div>
-    <div class="contact-link"><a href="mailto:uxxwd9@gmail.com">contact</a></div>
-    <div id="listButton" onclick="toggleSlideBox()">list</div>
-  </div>
-
-  <div class="slide-box" id="slideBox">
-    <div class="slide-list" id="slideToggleText" onclick="toggleSlideBox()">list</div>
-    <div id="slideContent"></div>
-  </div>
-
+  <!-- --------------------------------------------------
+       6. JavaScript (토글 및 이미지 교체 제어)
+  -------------------------------------------------- -->
   <script>
-    async function loadData() {
-      const res = await fetch("data.json");
-      const data = await res.json();
+    // 토글 박스 클릭 이벤트
+    function toggleAccordion(id) {
+      const targetItem = document.getElementById(id);
+      const gallery = document.getElementById('galleryContainer');
+      const allItems = document.querySelectorAll('.accordion-item');
 
-      const gallery = document.getElementById('gallery');
-      gallery.innerHTML = "";
+      const isActive = targetItem.classList.contains('active');
 
-      // 최신순으로 출력
-      for (let i = data.length; i >= 1; i--) {
-        const d = data[i-1];
-        const item = document.createElement('a');
-        item.href = `${i}/`;
-        item.className = 'thumbnail thumb'+i;
-        item.innerHTML = `
-          <img src="images/thumb${i}.png" alt="썸네일${i}"/>
-          <div class="caption">
-            <span class="title">${d.title}</span>
-            <span class="category-year">
-              <span class="category">${d.category}</span>
-              <span class="year">${d.year}</span>
-            </span>
-          </div>`;
-        gallery.append(item);
+      // 다른 토글 닫기
+      allItems.forEach(item => item.classList.remove('active'));
+
+      if (!isActive) {
+        // 클릭한 토글 열기 & 상단 이미지 축소 애니메이션 활성화
+        targetItem.classList.add('active');
+        gallery.classList.add('is-open');
+      } else {
+        // 열린 토글을 닫을 때 (모든 토글이 닫히면 원래 큰 이미지로 원복)
+        const anyActive = Array.from(allItems).some(item => item.classList.contains('active'));
+        if (!anyActive) {
+          gallery.classList.remove('is-open');
+        }
       }
-
-      const slideContent = document.getElementById('slideContent');
-      slideContent.innerHTML = "";
-      data.forEach((d, idx)=>{
-        const g = document.createElement('div');
-        g.className = 'text-group';
-        g.innerHTML = `
-          <div class="text1"><a href="${idx+1}/">${d.title}</a></div>
-          <div class="text2">${d.category}</div>
-          <div class="text3">${d.year}</div>`;
-        slideContent.append(g);
-      });
     }
 
-    function toggleSlideBox() {
-      const sb = document.getElementById('slideBox');
-      const txt = document.getElementById('slideToggleText');
-      sb.classList.toggle('active');
-      txt.textContent = sb.classList.contains('active') ? 'close' : 'list';
+    // 썸네일 클릭 시 메인 이미지 전환
+    function switchColor(element, imgSrc) {
+      document.getElementById('mainImg').src = imgSrc;
+      document.querySelectorAll('.color-thumb').forEach(thumb => thumb.classList.remove('active'));
+      element.classList.add('active');
     }
-
-    document.addEventListener('DOMContentLoaded', loadData);
   </script>
 </body>
 </html>
