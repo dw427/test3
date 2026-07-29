@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>상세페이지 - Hugyourskin Style</title>
+  <title>0상세페이지1</title>
   
   <!-- Pretendard 웹폰트 연동 -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
@@ -62,12 +62,12 @@
       object-fit: cover;
     }
 
-    /* 우측 영역 (독립 스크롤) - 이미지 스펙 기준 여백 63px 적용 */
+    /* 우측 영역 (독립 스크롤) - 좌우 여백 63px, 하단 여백 70px */
     .right-section {
       width: 50%;
       height: 100%;
       overflow-y: auto;
-      padding: 0 63px 70px 63px; /* 좌우 여백 63px, 하단 여백 70px */
+      padding: 0 63px 70px 63px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -78,7 +78,7 @@
       max-width: 518px;
     }
 
-    /* 우측 상품 이미지 컨테이너 (토글 클릭 시 상단 여백 100px 적용) */
+    /* 우측 상품 이미지 컨테이너 */
     .product-image-container {
       width: 100%;
       display: flex;
@@ -99,7 +99,7 @@
       transition: width 0.35s ease, height 0.35s ease, border-color 0.35s ease;
     }
 
-    /* 아더 컬러 이미지 (기본 0x0 및 숨김) */
+    /* 아더 컬러 이미지 */
     .other-color-image {
       width: 0;
       height: 0;
@@ -110,13 +110,13 @@
     }
 
     /* ==============================================
-       토글 활성화 시 이미지 및 여백 변화 (스펙 100px, 36px)
+       토글 활성화 시 이미지 및 여백 변화 (상단 100px, 간격 36px)
        ============================================== */
     
     .right-section.toggle-active .product-image-container {
       justify-content: flex-start;
-      margin-top: 100px; /* 상단 여백 100px */
-      margin-bottom: 36px; /* 이미지 하단 간격 36px */
+      margin-top: 100px;
+      margin-bottom: 36px;
     }
 
     .right-section.toggle-active .main-image {
@@ -133,16 +133,16 @@
 
     /* ============================================== */
 
-    /* 상품명 & 가격 (프리텐다드 볼드 15pt = 20px) */
+    /* 상품명 & 가격 (프리텐다드 Bold 15pt) */
     .product-title {
-      font-size: 20px;
+      font-size: 15pt;
       font-weight: 700;
       margin-bottom: 4px;
       color: #000;
     }
 
     .product-price {
-      font-size: 20px;
+      font-size: 15pt;
       font-weight: 700;
       margin-bottom: 50px; /* 가격 하단 간격 50px */
       color: #000;
@@ -163,7 +163,7 @@
       border-bottom: none;
     }
 
-    /* 토글 헤더 (프리텐다드 미디움 15pt = 20px) */
+    /* 토글 헤더 (프리텐다드 Medium 15pt) */
     .toggle-header {
       width: 100%;
       padding: 16px 0;
@@ -172,7 +172,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 20px;
+      font-size: 15pt;
       font-weight: 500;
       cursor: pointer;
       text-align: left;
@@ -180,15 +180,15 @@
     }
 
     .toggle-icon {
-      font-size: 14px;
+      font-size: 10pt;
       transition: transform 0.3s ease;
     }
 
-    /* 토글 본문 (프리텐다드 미디움 12pt = 16px) */
+    /* 토글 본문 (프리텐다드 Medium 12pt) */
     .toggle-content {
       max-height: 0;
       overflow: hidden;
-      font-size: 16px;
+      font-size: 12pt;
       font-weight: 500;
       line-height: 1.6;
       color: #000;
@@ -197,19 +197,20 @@
 
     .toggle-item.open .toggle-content {
       max-height: 1000px;
-      padding-bottom: 33px; /* 설명 밑 토글 간격 33px */
+      padding-bottom: 33px; /* 설명 밑 간격 33px */
     }
 
     .toggle-item.open .toggle-icon {
       transform: rotate(180deg);
     }
 
-    /* 디테일 인포 본문 텍스트 단락 세부 간격 */
+    /* 디테일 인포 본문 텍스트 여백 */
     .detail-text-block {
       padding-top: 8px;
     }
     
     .detail-title {
+      font-size: 12pt;
       font-weight: 500;
       margin-bottom: 16px;
     }
@@ -224,13 +225,13 @@
     }
 
     .detail-notice {
-      color: #333;
+      color: #000;
       margin-bottom: 20px;
     }
 
     .detail-wash {
       list-style: none;
-      color: #333;
+      color: #000;
       margin-bottom: 20px;
     }
 
@@ -239,6 +240,7 @@
     }
 
     .detail-texture {
+      font-size: 12pt;
       font-weight: 500;
     }
 
@@ -251,7 +253,7 @@
     .btn {
       flex: 1;
       padding: 16px 0;
-      font-size: 16px;
+      font-size: 12pt;
       font-weight: 700;
       border: 1px solid #000;
       background-color: #fff;
@@ -290,7 +292,7 @@
           <img src="images/product_other.jpg" alt="Product Other (Gray)" class="other-color-image">
         </div>
 
-        <!-- 타이틀 & 가격 (프리텐다드 볼드 15pt) -->
+        <!-- 타이틀 & 가격 (프리텐다드 Bold 15pt) -->
         <div class="product-title">Pointelle knit cardigan (Ivory)</div>
         <div class="product-price">98,000원</div>
 
